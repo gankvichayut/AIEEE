@@ -3,324 +3,224 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Us | Tech Hub</title>
-    <!-- Font style: Inter จาก Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    
+    <title>Connect with Us | Future Connect</title>
     <style>
-        /* --- 1. Reset & Global Styles --- */
+        /* --- Reset & Global --- */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
-        }
-
-        :root {
-            /* โทนสี Tech นีออน */
-            --bg-dark: #050509;
-            --primary-purple: #9d4edd;
-            --primary-blue: #4ea8de;
-            --primary-pink: #ff9eae;
-            --text-main: #ffffff;
-            --text-sub: #b0b0b0;
-            /* สีโปร่งแสง */
-            --glass-bg: rgba(255, 255, 255, 0.03);
-            --glass-border: rgba(255, 255, 255, 0.08);
-            --glass-shadow: rgba(0, 0, 0, 0.37);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* ฟอนต์สไตล์โมเดิร์น */
         }
 
         body {
-            background-color: var(--bg-dark);
-            color: var(--text-main);
+            background-color: #03001a; /* พื้นหลังสีเข้มโทนน้ำเงิน/ม่วง */
+            background-image: 
+                radial-gradient(at 10% 20%, rgba(126, 34, 206, 0.3) 0px, transparent 50%), /* ม่วง */
+                radial-gradient(at 80% 80%, rgba(29, 78, 216, 0.3) 0px, transparent 50%), /* ฟ้า */
+                radial-gradient(at 50% 50%, rgba(219, 39, 119, 0.2) 0px, transparent 50%); /* ชมพู */
+            background-attachment: fixed;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
             overflow-x: hidden;
-            line-height: 1.6;
         }
 
-        /* เอฟเฟกต์พื้นหลังเรืองแสง */
-        body::before {
+        /* --- Main Container (Effect: Glassmorphism) --- */
+        .main-container {
+            width: 90%;
+            max-width: 480px;
+            background: rgba(255, 255, 255, 0.03); /* โปร่งแสง */
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px); /* เอฟเฟกต์เบลอ */
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 8px 32px 0 rgba(10, 0, 30, 0.37);
+            overflow: hidden; /* เพื่อให้มุมแบนเนอร์โค้งตาม container */
+            padding-bottom: 30px;
+        }
+
+        /* --- Profile/Banner Section --- */
+        .profile-banner {
+            width: 100%;
+            height: 180px;
+            background-color: #0c0032; /* สีพื้นหลังกรณีไม่มีรูป */
+            background-size: cover;
+            background-position: center;
+            
+            /* [ฮาร์ดโค้ด: ใส่ URL รูปภาพแบนเนอร์ของคุณที่นี่] */
+            background-image: url('https://images.unsplash.com/photo-1614728894747-a83421e2b9c9?q=80&w=1000&auto=format&fit=crop'); 
+            
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+        }
+
+        /* เอฟเฟกต์แสงเงาด้านล่างแบนเนอร์ */
+        .profile-banner::after {
             content: '';
-            position: fixed;
-            top: -100px;
-            left: -100px;
-            width: 300px;
-            height: 300px;
-            background: var(--primary-purple);
-            filter: blur(150px);
-            opacity: 0.2;
-            z-index: -1;
-        }
-
-        a {
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        /* --- 2. Header & Banner Section --- */
-        header {
+            position: absolute;
+            bottom: 0;
+            left: 0;
             width: 100%;
             height: 60px;
-            background: var(--glass-bg);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--glass-border);
-            position: fixed;
-            top: 0;
-            z-index: 1000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0 20px;
+            background: linear-gradient(to top, rgba(3, 0, 26, 0.8), transparent);
         }
 
-        .brand-logo {
-            font-size: 1.2rem;
-            font-weight: 600;
-            letter-spacing: 1px;
-            color: var(--text-main);
-        }
-        
-        .brand-logo span {
-            color: var(--primary-blue);
-        }
-
-        .banner-container {
-            width: 100%;
-            height: 40vh; /* ความสูงแบนเนอร์ */
-            margin-top: 60px; /* หลบ header */
+        .profile-pic {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 4px solid #fff;
             position: relative;
-            overflow: hidden;
-        }
+            z-index: 10;
+            margin-bottom: -50px; /* ให้รูปโปรไฟล์เหลื่อมออกมา */
+            box-shadow: 0 0 20px rgba(126, 34, 206, 0.5); /* แสงเรืองแสง */
+            background-color: #fff;
 
-        .banner-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* ปรับรูปให้เต็มพื้นที่ */
-            object-position: center;
-            /* แนะนำให้ใช้รูป banner.jpg */
-            background-image: url('banner.jpg'); 
+            /* [ฮาร์ดโค้ด: ใส่ URL รูปภาพโปรไฟล์ของคุณที่นี่] */
+            background-image: url('https://i.pravatar.cc/150?u=techyname');
             background-size: cover;
             background-position: center;
         }
-        
-        /* ใส่ Overlay เพื่อให้ตัวอักษรบน Banner อ่านง่าย (Optional) */
-        .banner-overlay {
+
+        /* --- Text Section --- */
+        .text-info {
+            text-align: center;
+            margin-top: 60px; /* เผื่อพื้นที่ให้รูปโปรไฟล์เหลื่อม */
+            padding: 0 20px;
+        }
+
+        .profile-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        .profile-bio {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 25px;
+        }
+
+        /* --- Buttons Section (Contact Links) --- */
+        .links-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px; /* ระยะห่างระหว่างปุ่ม */
+            padding: 0 20px;
+        }
+
+        .link-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 20px;
+            text-decoration: none;
+            color: #fff;
+            font-weight: 600;
+            font-size: 1rem;
+            border-radius: 12px;
+            position: relative;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            border: 1px solid transparent;
+        }
+
+        /* Effect: Futuristic Gradient Border (ตอนโฮเวอร์) */
+        .link-button::before {
+            content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(180deg, rgba(5,5,9,0) 0%, rgba(5,5,9,0.8) 100%);
+            background: linear-gradient(45deg, #7e22ce, #db2777, #1d4ed8);
+            opacity: 0.1; /* ปรกติให้จาง */
+            transition: 0.3s;
+            z-index: -1;
         }
 
-        /* --- 3. Main Content Area --- */
-        main {
-            max-width: 800px;
-            margin: -50px auto 100px; /* ดันเนื้อหาขึ้นไปทับแบนเนอร์นิดหน่อย */
-            padding: 0 20px;
-            position: relative;
-            z-index: 10;
+        /* เอฟเฟกต์แสงเรืองแสง (Neon Glow) ตอนโฮเวอร์ */
+        .link-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px rgba(219, 39, 119, 0.5); /* เรืองแสงสีชมพู */
+            border-color: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
         }
 
-        .contact-section {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid var(--glass-border);
-            border-radius: 20px;
-            padding: 40px;
-            box-shadow: 0 8px 32px var(--glass-shadow);
+        .link-button:hover::before {
+            opacity: 0.3; /* เรืองแสงขึ้นมา */
         }
 
-        .section-header {
-            text-align: center;
-            margin-bottom: 40px;
+        /* Styles สำหรับแต่ละปุ่ม (กำหนดสี Border สไตล์ Tech) */
+        .facebook-btn { border: 1px solid rgba(29, 161, 242, 0.4); } /* สีฟ้า */
+        .instagram-btn { border: 1px solid rgba(219, 39, 119, 0.4); } /* สีชมพู */
+        .line-btn { border: 1px solid rgba(6, 193, 0, 0.4); } /* สีเขียว */
+        .email-btn { border: 1px solid rgba(126, 34, 206, 0.4); } /* สีม่วง */
+
+        /* เพิ่มความระยิบระยับแบบเทค (Scanning line) */
+        .link-button::after {
+            content: '';
+            position: absolute;
+            top: -100%;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.1), transparent);
+            transition: 0.5s;
         }
 
-        .section-title {
-            font-size: 2rem;
-            font-weight: 600;
-            background: linear-gradient(to right, var(--primary-blue), var(--primary-pink));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            margin-bottom: 10px;
+        .link-button:hover::after {
+            top: 100%;
         }
 
-        .section-subtitle {
-            color: var(--text-sub);
-            font-weight: 300;
-            font-size: 0.9rem;
-        }
-
-        /* --- 4. Contact Links (Buttons) --- */
-        .contact-links-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
-
-        .contact-card {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid var(--glass-border);
-            border-radius: 12px;
-            padding: 20px;
-            display: flex;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .contact-card:hover {
-            border-color: var(--primary-purple);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(157, 78, 221, 0.1);
-        }
-
-        /* ไอคอน (Hardcoded เป็นวงกลมสีไปก่อน) */
-        .contact-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
-            margin-right: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-        }
-
-        .contact-info {
-            flex: 1;
-        }
-
-        .contact-label {
-            font-size: 0.8rem;
-            color: var(--text-sub);
-            margin-bottom: 2px;
-        }
-
-        .contact-value {
-            font-size: 1rem;
-            font-weight: 400;
-            color: var(--text-main);
-        }
-
-        /* สไตล์เฉพาะแต่ละช่องทาง */
-        .card-facebook:hover .contact-icon { background-color: #1877F2; color: white; }
-        .card-instagram:hover .contact-icon { background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); color: white; }
-        .card-line:hover .contact-icon { background-color: #06C755; color: white; }
-        .card-email:hover .contact-icon { background-color: var(--primary-pink); color: var(--bg-dark); }
-
-        /* การ์ดแบบ Button (คลิกได้) */
-        .contact-btn {
-            grid-column: 1 / -1; /* ให้เต็มความกว้าง */
-            justify-content: center;
-            background: linear-gradient(135deg, rgba(157, 78, 221, 0.2) 0%, rgba(78, 168, 222, 0.2) 100%);
-            border: 1px solid var(--primary-purple);
-            margin-top: 20px;
-            font-weight: 600;
-        }
-        
-        .contact-btn:hover {
-            background: linear-gradient(135deg, rgba(157, 78, 221, 0.4) 0%, rgba(78, 168, 222, 0.4) 100%);
-        }
-
-        /* --- 5. Footer --- */
-        footer {
-            text-align: center;
-            padding: 30px;
-            font-size: 0.8rem;
-            color: var(--text-sub);
-            border-top: 1px solid var(--glass-border);
-            margin-top: auto;
-        }
-
-        /* --- 6. Responsive Design --- */
-        @media (max-width: 600px) {
-            main {
-                margin-top: -30px;
-            }
-            .contact-section {
-                padding: 30px 20px;
-            }
-            .section-title {
-                font-size: 1.6rem;
-            }
-            .contact-links-grid {
-                grid-template-columns: 1fr;
-            }
-        }
     </style>
 </head>
 <body>
 
-    <!-- Header -->
-    <header>
-        <div class="brand-logo">TECH<span>HUB</span></div>
-    </header>
+    <div class="main-container">
+        <!-- แบนเนอร์ (Hard-coded background ใน CSS) -->
+        <div class="profile-banner">
+            <!-- รูปโปรไฟล์ (Hard-coded background ใน CSS) -->
+            <div class="profile-pic"></div>
+        </div>
 
-    <!-- Banner Session -->
-    <div class="banner-container">
-        <!-- ถ้ารูป banner.jpg ไม่มี จะแสดงพื้นหลังสีดำ -->
-        <div class="banner-img"></div>
-        <div class="banner-overlay"></div>
+        <div class="text-info">
+            <!-- [ฮาร์ดโค้ด: เปลี่ยนชื่อและ Bio ที่นี่] -->
+            <h1 class="profile-name">Futurist Tech Solutions</h1>
+            <p class="profile-bio">Connect with the future of digital innovation.</p>
+        </div>
+
+        <div class="links-container">
+            <!-- [ฮาร์ดโค้ด: เปลี่ยนลิงก์ URL ที่ href="..." ของแต่ละปุ่มที่นี่] -->
+
+            <!-- Facebook -->
+            <a href="https://facebook.com/yourpagename" target="_blank" class="link-button facebook-btn">
+                <span>Facebook Page</span>
+            </a>
+
+            <!-- Instagram -->
+            <a href="https://instagram.com/yourusername" target="_blank" class="link-button instagram-btn">
+                <span>Instagram</span>
+            </a>
+
+            <!-- Line OA -->
+            <a href="https://line.me/ti/p/@yourlineoa" target="_blank" class="link-button line-btn">
+                <span>LINE Official Account</span>
+            </a>
+
+            <!-- Email (รูปแบบ mailto:) -->
+            <a href="mailto:your.email@example.com" class="link-button email-btn">
+                <span>Email Us</span>
+            </a>
+        </div>
     </div>
-
-    <!-- Main Content -->
-    <main>
-        <section class="contact-section">
-            
-            <div class="section-header">
-                <h1 class="section-title">Get In Touch</h1>
-                <p class="section-subtitle">ช่องทางการติดต่อสอบถามและติดตามเรา</p>
-            </div>
-
-            <div class="contact-links-grid">
-
-                <!-- Facebook -->
-                <a href="https://facebook.com/yourpage" target="_blank" class="contact-card card-facebook">
-                    <div class="contact-icon">f</div>
-                    <div class="contact-info">
-                        <div class="contact-label">Facebook Page</div>
-                        <div class="contact-value">Tech Hub Thailand</div>
-                    </div>
-                </a>
-
-                <!-- Instagram -->
-                <a href="https://instagram.com/yourusername" target="_blank" class="contact-card card-instagram">
-                    <div class="contact-icon">📷</div>
-                    <div class="contact-info">
-                        <div class="contact-label">Instagram</div>
-                        <div class="contact-value">@techhub.official</div>
-                    </div>
-                </a>
-
-                <!-- Line OA -->
-                <a href="https://line.me/ti/p/@yourlineoa" target="_blank" class="contact-card card-line">
-                    <div class="contact-icon">L</div>
-                    <div class="contact-info">
-                        <div class="contact-label">Line Official</div>
-                        <div class="contact-value">@techhub</div>
-                    </div>
-                </a>
-
-                <!-- Email -->
-                <a href="mailto:contact@yourdomain.com" class="contact-card card-email">
-                    <div class="contact-icon">📩</div>
-                    <div class="contact-info">
-                        <div class="contact-label">Email Success</div>
-                        <div class="contact-value">support@techhub.com</div>
-                    </div>
-                </a>
-
-            </div>
-
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2024 Tech Hub. All rights reserved.</p>
-    </footer>
 
 </body>
 </html>
