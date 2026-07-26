@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Tech Hub</title>
+    <!-- Font style: Inter จาก Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- 1. Reset & Global Styles --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        :root {
+            /* โทนสี Tech นีออน */
+            --bg-dark: #050509;
+            --primary-purple: #9d4edd;
+            --primary-blue: #4ea8de;
+            --primary-pink: #ff9eae;
+            --text-main: #ffffff;
+            --text-sub: #b0b0b0;
+            /* สีโปร่งแสง */
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-shadow: rgba(0, 0, 0, 0.37);
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* เอฟเฟกต์พื้นหลังเรืองแสง */
+        body::before {
+            content: '';
+            position: fixed;
+            top: -100px;
+            left: -100px;
+            width: 300px;
+            height: 300px;
+            background: var(--primary-purple);
+            filter: blur(150px);
+            opacity: 0.2;
+            z-index: -1;
+        }
+
+        a {
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        /* --- 2. Header & Banner Section --- */
+        header {
+            width: 100%;
+            height: 60px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--glass-border);
+            position: fixed;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 20px;
+        }
+
+        .brand-logo {
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: var(--text-main);
+        }
+        
+        .brand-logo span {
+            color: var(--primary-blue);
+        }
+
+        .banner-container {
+            width: 100%;
+            height: 40vh; /* ความสูงแบนเนอร์ */
+            margin-top: 60px; /* หลบ header */
+            position: relative;
+            overflow: hidden;
+        }
+
+        .banner-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* ปรับรูปให้เต็มพื้นที่ */
+            object-position: center;
+            /* แนะนำให้ใช้รูป banner.jpg */
+            background-image: url('banner.jpg'); 
+            background-size: cover;
+            background-position: center;
+        }
+        
+        /* ใส่ Overlay เพื่อให้ตัวอักษรบน Banner อ่านง่าย (Optional) */
+        .banner-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(5,5,9,0) 0%, rgba(5,5,9,0.8) 100%);
+        }
+
+        /* --- 3. Main Content Area --- */
+        main {
+            max-width: 800px;
+            margin: -50px auto 100px; /* ดันเนื้อหาขึ้นไปทับแบนเนอร์นิดหน่อย */
+            padding: 0 20px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .contact-section {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 8px 32px var(--glass-shadow);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 600;
+            background: linear-gradient(to right, var(--primary-blue), var(--primary-pink));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .section-subtitle {
+            color: var(--text-sub);
+            font-weight: 300;
+            font-size: 0.9rem;
+        }
+
+        /* --- 4. Contact Links (Buttons) --- */
+        .contact-links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .contact-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-card:hover {
+            border-color: var(--primary-purple);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(157, 78, 221, 0.1);
+        }
+
+        /* ไอคอน (Hardcoded เป็นวงกลมสีไปก่อน) */
+        .contact-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .contact-info {
+            flex: 1;
+        }
+
+        .contact-label {
+            font-size: 0.8rem;
+            color: var(--text-sub);
+            margin-bottom: 2px;
+        }
+
+        .contact-value {
+            font-size: 1rem;
+            font-weight: 400;
+            color: var(--text-main);
+        }
+
+        /* สไตล์เฉพาะแต่ละช่องทาง */
+        .card-facebook:hover .contact-icon { background-color: #1877F2; color: white; }
+        .card-instagram:hover .contact-icon { background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%); color: white; }
+        .card-line:hover .contact-icon { background-color: #06C755; color: white; }
+        .card-email:hover .contact-icon { background-color: var(--primary-pink); color: var(--bg-dark); }
+
+        /* การ์ดแบบ Button (คลิกได้) */
+        .contact-btn {
+            grid-column: 1 / -1; /* ให้เต็มความกว้าง */
+            justify-content: center;
+            background: linear-gradient(135deg, rgba(157, 78, 221, 0.2) 0%, rgba(78, 168, 222, 0.2) 100%);
+            border: 1px solid var(--primary-purple);
+            margin-top: 20px;
+            font-weight: 600;
+        }
+        
+        .contact-btn:hover {
+            background: linear-gradient(135deg, rgba(157, 78, 221, 0.4) 0%, rgba(78, 168, 222, 0.4) 100%);
+        }
+
+        /* --- 5. Footer --- */
+        footer {
+            text-align: center;
+            padding: 30px;
+            font-size: 0.8rem;
+            color: var(--text-sub);
+            border-top: 1px solid var(--glass-border);
+            margin-top: auto;
+        }
+
+        /* --- 6. Responsive Design --- */
+        @media (max-width: 600px) {
+            main {
+                margin-top: -30px;
+            }
+            .contact-section {
+                padding: 30px 20px;
+            }
+            .section-title {
+                font-size: 1.6rem;
+            }
+            .contact-links-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="brand-logo">TECH<span>HUB</span></div>
+    </header>
+
+    <!-- Banner Session -->
+    <div class="banner-container">
+        <!-- ถ้ารูป banner.jpg ไม่มี จะแสดงพื้นหลังสีดำ -->
+        <div class="banner-img"></div>
+        <div class="banner-overlay"></div>
+    </div>
+
+    <!-- Main Content -->
+    <main>
+        <section class="contact-section">
+            
+            <div class="section-header">
+                <h1 class="section-title">Get In Touch</h1>
+                <p class="section-subtitle">ช่องทางการติดต่อสอบถามและติดตามเรา</p>
+            </div>
+
+            <div class="contact-links-grid">
+
+                <!-- Facebook -->
+                <a href="https://facebook.com/yourpage" target="_blank" class="contact-card card-facebook">
+                    <div class="contact-icon">f</div>
+                    <div class="contact-info">
+                        <div class="contact-label">Facebook Page</div>
+                        <div class="contact-value">Tech Hub Thailand</div>
+                    </div>
+                </a>
+
+                <!-- Instagram -->
+                <a href="https://instagram.com/yourusername" target="_blank" class="contact-card card-instagram">
+                    <div class="contact-icon">📷</div>
+                    <div class="contact-info">
+                        <div class="contact-label">Instagram</div>
+                        <div class="contact-value">@techhub.official</div>
+                    </div>
+                </a>
+
+                <!-- Line OA -->
+                <a href="https://line.me/ti/p/@yourlineoa" target="_blank" class="contact-card card-line">
+                    <div class="contact-icon">L</div>
+                    <div class="contact-info">
+                        <div class="contact-label">Line Official</div>
+                        <div class="contact-value">@techhub</div>
+                    </div>
+                </a>
+
+                <!-- Email -->
+                <a href="mailto:contact@yourdomain.com" class="contact-card card-email">
+                    <div class="contact-icon">📩</div>
+                    <div class="contact-info">
+                        <div class="contact-label">Email Success</div>
+                        <div class="contact-value">support@techhub.com</div>
+                    </div>
+                </a>
+
+            </div>
+
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Tech Hub. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
