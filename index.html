@@ -3,17 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AIEEE | Cyber Neon Club</title>
+    <title>AIEEE</title>
     
     <!-- ดึงฟอนต์ Chakra Petch จาก Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
 
+    <!-- Font Awesome Icons (สำหรับไอคอนโลโก้แอปพลิเคชัน) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
     <style>
         /* --- Reset & Base Styles --- */
         html {
-            /* แก้ปัญหา Navbar บังหัวข้อเมื่อกดปุ่มเลื่อนหน้า */
             scroll-padding-top: 90px;
             scroll-behavior: smooth;
         }
@@ -27,7 +29,6 @@
 
         body {
             background-color: #030210;
-            /* เน้นแดงกับน้ำเงินเป็นหลัก (Red ~40%, Blue ~40%, Purple/Pink ~20%) */
             background-image: 
                 radial-gradient(at 15% 20%, rgba(220, 38, 38, 0.45) 0px, transparent 50%),  /* แดง Crimson */
                 radial-gradient(at 85% 30%, rgba(37, 99, 235, 0.5) 0px, transparent 50%),   /* น้ำเงิน Royal Blue */
@@ -49,7 +50,7 @@
             background: #030210;
         }
         ::-webkit-scrollbar-thumb {
-            background: linear-gradient(180deg, #dc2626, #a855f7, #2563eb); /* ไล่ระดับแดงไปน้ำเงิน */
+            background: linear-gradient(180deg, #dc2626, #a855f7, #2563eb);
             border-radius: 4px;
         }
 
@@ -82,11 +83,17 @@
             justify-content: space-between;
             align-items: center;
             z-index: 1000;
-            background: rgba(3, 2, 16, 0.65);
+            background: rgba(3, 2, 16, 0.75);
             border-radius: 50px;
             border: 1px solid rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(16px);
             box-shadow: 0 0 20px rgba(37, 99, 235, 0.25), 0 0 10px rgba(220, 38, 38, 0.2);
+            transition: top 0.4s ease, opacity 0.4s ease;
+        }
+
+        .navbar.nav-hidden {
+            top: -100px;
+            opacity: 0;
         }
 
         .logo {
@@ -133,6 +140,15 @@
 
         .nav-links a:hover::after {
             width: 100%;
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: #fff;
+            font-size: 1.6rem;
+            cursor: pointer;
         }
 
         /* --- Layout Container --- */
@@ -274,11 +290,13 @@
             margin-bottom: 35px;
         }
 
+        /* ปุ่มติดต่อแบบใส่ไอคอนด้านซ้ายสุด */
         .link-button {
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 14px;
+            position: relative; /* สำหรับจัดตำแหน่งไอคอนซ้ายสุด */
+            padding: 14px 20px;
             text-decoration: none;
             color: #fff;
             font-weight: 600;
@@ -286,15 +304,22 @@
             border-radius: 12px;
             background: rgba(255, 255, 255, 0.04);
             transition: 0.3s;
-            position: relative;
             overflow: hidden;
             letter-spacing: 0.5px;
+        }
+
+        /* จัดให้ไอคอนอยู่ติดขอบซ้าย */
+        .link-button i {
+            position: absolute;
+            left: 20px;
+            font-size: 1.3rem;
         }
 
         .facebook-btn { border: 1px solid rgba(37, 99, 235, 0.5); } 
         .instagram-btn { border: 1px solid rgba(245, 65, 197, 0.5); } 
         .line-btn { border: 1px solid rgba(72, 236, 124, 0.5); }     
-        .email-btn { border: 1px solid rgba(168, 85, 247, 0.5); }     
+        .email-btn { border: 1px solid rgba(168, 85, 247, 0.5); }
+        .tiktok-btn { border: 1px solid rgba(255, 0, 128, 0.5); }
 
         .link-button:hover {
             transform: translateY(-2px);
@@ -305,6 +330,7 @@
         .instagram-btn:hover { background: rgba(245, 65, 197, 0.25); box-shadow: 0 0 15px rgba(245, 65, 197, 0.5); }
         .line-btn:hover { background: rgba(72, 236, 124, 0.25); box-shadow: 0 0 15px rgba(72, 236, 124, 0.5); }
         .email-btn:hover { background: rgba(168, 85, 247, 0.25); box-shadow: 0 0 15px rgba(168, 85, 247, 0.5); }
+        .tiktok-btn:hover { background: rgba(255, 0, 128, 0.25); box-shadow: 0 0 15px rgba(255, 0, 128, 0.5); }
 
         /* --- Google Form Wrapper Styles --- */
         .form-section-title {
@@ -342,13 +368,49 @@
             border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
 
-        /* Responsive Design */
+        /* ========================================== */
+        /* --- Responsive Design สำหรับมือถือ (Mobile) --- */
+        /* ========================================== */
         @media (max-width: 768px) {
             html { scroll-padding-top: 80px; }
             .hero-title { font-size: 2.3rem; }
             .about-grid { grid-template-columns: 1fr; }
-            .navbar { padding: 10px 20px; }
-            .nav-links { gap: 15px; font-size: 0.9rem; }
+            
+            .navbar { 
+                padding: 12px 20px; 
+                flex-wrap: wrap;
+                border-radius: 25px;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                gap: 12px;
+                padding-top: 15px;
+                margin-top: 10px;
+                border-top: 1px solid rgba(255, 255, 255, 0.1);
+                text-align: center;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .nav-links a {
+                font-size: 1.05rem;
+                padding: 6px 0;
+            }
+
+            .link-button i {
+                left: 15px; /* ปรับระยะไอคอนบนมือถือ */
+                font-size: 1.2rem;
+            }
+
             .connect-wrapper { padding: 30px 15px; }
             .iframe-container iframe { height: 580px; }
         }
@@ -357,14 +419,14 @@
 <body>
 
     <!-- 1. Futuristic Navbar -->
-    <nav class="navbar">
+    <nav class="navbar" id="navbar">
         <div class="logo">AIEEE</div>
-        <ul class="nav-links">
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle Navigation">☰</button>
+        <ul class="nav-links" id="navLinks">
             <li><a href="#home">หน้าแรก</a></li>
             <li><a href="#about">เกี่ยวกับเรา</a></li>
             <li><a href="#highlights">จุดเด่น</a></li>
             <li><a href="#connect">ติดต่อเรา</a></li>
-            <li><a href="#form">ลงทะเบียน</a></li>
         </ul>
     </nav>
 
@@ -372,7 +434,7 @@
         
         <!-- 2. Hero Section -->
         <section id="home" class="hero-section">
-            <h1 class="hero-title">ยินดีต้อนรับสู่ชมรมของเรา</h1>
+            <h1 class="hero-title">ยินดีต้อนรับสู่ชมรม AIEEE</h1>
             <p class="hero-subtitle">พื้นที่สำหรับการเรียนรู้ สร้างสรรค์ และปลดปล่อยศักยภาพของคนรุ่นใหม่ ร่วมสร้างอนาคตไปพร้อมกับเรา</p>
             <a href="#form" class="cta-btn">เข้าร่วมชมรมกับเรา</a>
         </section>
@@ -383,7 +445,7 @@
             <div class="about-grid">
                 <div class="glass-card about-text">
                     <h3 style="margin-bottom: 15px; background: linear-gradient(90deg, #ef4444, #a855f7, #3b82f6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 1.4rem;">เราคือใคร?</h3>
-                    <p style="color: rgba(255,255,255,0.85); font-size: 1.05rem;">ชมรมของเราเป็นศูนย์รวมของนิสิต/นักศึกษาที่มีความสนใจร่วมกัน มุ่งเน้นการลงมือปฏิบัติจริง (Hands-on Practice) การแลกเปลี่ยนความรู้ และการสร้างโปรเจกต์นวัตกรรมใหม่ๆ ร่วมกัน</p>
+                    <p style="color: rgba(255,255,255,0.85); font-size: 1.05rem;">ชมรมของเราเป็นศูนย์รวมของนักศึกษาที่มีความสนใจร่วมกัน มุ่งเน้นการลงมือปฏิบัติจริง (Hands-on Practice) การแลกเปลี่ยนความรู้ และการสร้างโปรเจกต์นวัตกรรมใหม่ๆ ร่วมกัน</p>
                 </div>
                 <div class="about-img"></div>
             </div>
@@ -419,12 +481,28 @@
                 <h3 style="margin-bottom: 5px; font-size: 1.4rem;">Connect with Us</h3>
                 <p style="font-size: 0.9rem; color: rgba(255,255,255,0.65);">ติดตามข่าวสารและสอบถามข้อมูลเพิ่มเติมได้ผ่านช่องทางนี้</p>
                 
-                <!-- Social Links -->
+                <!-- Social Links (พร้อมไอคอนประจำแอปที่ซ้ายสุด) -->
                 <div class="links-container">
-                    <a href="https://facebook.com/yourpagename" target="_blank" class="link-button facebook-btn">Facebook Page</a>
-                    <a href="https://instagram.com/yourusername" target="_blank" class="link-button instagram-btn">Instagram</a>
-                    <a href="https://line.me/ti/p/@yourlineoa" target="_blank" class="link-button line-btn">LINE Official Account</a>
-                    <a href="mailto:your.email@example.com" class="link-button email-btn">Email Us</a>
+                    <a href="mailto:aieee.studentbranch.rmutt@gmail.com" class="link-button email-btn">
+                        <i class="fa-solid fa-envelope"></i>
+                        <span>Email Us</span>
+                    </a>
+                    <a href="https://line.me/ti/p/@459rtlnu" target="_blank" class="link-button line-btn">
+                        <i class="fa-brands fa-line"></i>
+                        <span>LINE Official Account</span>
+                    </a>
+                    <a href="https://instagram.com/aieee.studentbranch.rmutt" target="_blank" class="link-button instagram-btn">
+                        <i class="fa-brands fa-instagram"></i>
+                        <span>Instagram</span>
+                    </a>
+                    <a href="https://facebook.com/AIEEE.RMUTT" target="_blank" class="link-button facebook-btn">
+                        <i class="fa-brands fa-facebook"></i>
+                        <span>Facebook Page</span>
+                    </a>
+                    <a href="https://tiktok.com/@aieee.studentbranch.rmutt" target="_blank" class="link-button tiktok-btn">
+                        <i class="fa-brands fa-tiktok"></i>
+                        <span>TikTok</span>
+                    </a>
                 </div>
             </div>
         </section>
@@ -433,7 +511,7 @@
 
         <!-- 6. Google Form Section -->
         <section id="form">
-            <h2 class="section-title">แบบฟอร์มลงทะเบียน / สอบถามข้อมูล</h2>
+            <h2 class="section-title">แบบฟอร์มลงทะเบียนเข้าชมรม</h2>
             <div class="glass-card connect-wrapper">
                 <h3 class="form-section-title">กรุณากรอกข้อมูลด้านล่าง</h3>
                 <div class="iframe-container">
@@ -455,6 +533,43 @@
     <footer>
         <p>© 2026 AIEEE. All rights reserved.</p>
     </footer>
+
+    <!-- JavaScript สำหรับจัดการปุ่มเมนูมือถือ และระบบซ่อน/แสดง Navbar ตอน Scroll -->
+    <script>
+        const navbar = document.getElementById('navbar');
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        // 1. เปิด / ปิด เมนูดร็อปดาวน์บนมือถือเมื่อกดปุ่ม ☰
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // 2. ปิดเมนูดร็อปดาวน์เมื่อเลือกคลิกที่ลิงก์ใดๆ
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // 3. ซ่อน Navbar เมื่อเลื่อนจอลง และแสดงเมื่อเลื่อนจอขึ้น
+        let lastScrollTop = 0;
+        window.addEventListener('scroll', () => {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            if (scrollTop > 80) {
+                if (scrollTop > lastScrollTop) {
+                    navbar.classList.add('nav-hidden');
+                    navLinks.classList.remove('active');
+                } else {
+                    navbar.classList.remove('nav-hidden');
+                }
+            } else {
+                navbar.classList.remove('nav-hidden');
+            }
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+        });
+    </script>
 
 </body>
 </html>
