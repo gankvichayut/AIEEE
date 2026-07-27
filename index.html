@@ -10,462 +10,22 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
 
-    <!-- Font Awesome Icons (สำหรับไอคอนโลโก้แอปพลิเคชัน) -->
+    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    
+    <!-- AOS CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+    <!-- แท็กเชื่อมโยงไปยังไฟล์ style.css ที่แยกออกมา -->
+    <link rel="stylesheet" href="style.css">
+
     <!-- แท็กสำหรับใส่ Favicon -->
     <link rel="icon" type="image/png" href="images/logofav.png">
-  
-    <style>
-        /* --- Reset & Base Styles --- */
-        html {
-            scroll-padding-top: 90px;
-            scroll-behavior: smooth;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Chakra Petch', sans-serif;
-        }
-
-        body {
-            background-color: #030210;
-            background-image: 
-                radial-gradient(at 15% 20%, rgba(220, 38, 38, 0.45) 0px, transparent 50%), 
-                radial-gradient(at 85% 30%, rgba(37, 99, 235, 0.5) 0px, transparent 50%),  
-                radial-gradient(at 20% 80%, rgba(2, 132, 199, 0.4) 0px, transparent 50%),  
-                radial-gradient(at 80% 75%, rgba(225, 29, 72, 0.4) 0px, transparent 50%),  
-                radial-gradient(at 50% 50%, rgba(155, 62, 243, 0.321) 0px, transparent 50%), 
-                radial-gradient(at 50% 90%, rgba(240, 32, 125, 0.385) 0px, transparent 50%); 
-            background-attachment: fixed;
-            color: #fff;
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        /* --- Custom Scrollbar --- */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #030210;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(180deg, #dc2626, #a855f7, #2563eb);
-            border-radius: 4px;
-        }
-
-        /* --- Glassmorphism Card Base --- */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
-            transition: all 0.3s ease;
-        }
-
-        .glass-card:hover {
-            border-color: rgba(220, 38, 38, 0.5);
-            box-shadow: 0 0 25px rgba(37, 99, 235, 0.4), 0 0 10px rgba(220, 38, 38, 0.3);
-        }
-
-        /* --- 1. Futuristic Navbar --- */
-        .navbar {
-            position: fixed;
-            top: 15px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 90%;
-            max-width: 1100px;
-            padding: 12px 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1000;
-            background: rgba(3, 2, 16, 0.75);
-            border-radius: 50px;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(16px);
-            box-shadow: 0 0 20px rgba(37, 99, 235, 0.25), 0 0 10px rgba(220, 38, 38, 0.2);
-            transition: top 0.4s ease, opacity 0.4s ease;
-        }
-
-        .navbar.nav-hidden {
-            top: -100px;
-            opacity: 0;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            background: linear-gradient(45deg, #ef4444 0%, #ef4444 45%, #ff81d3c1 50%, #0249ac 75%, #0249ac 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 25px;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: rgba(255, 255, 255, 0.85);
-            text-decoration: none;
-            font-size: 1rem;
-            font-weight: 500;
-            transition: 0.3s;
-            position: relative;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0%;
-            height: 2px;
-            background: linear-gradient(90deg, #dc2626, #2563eb);
-            transition: 0.3s;
-            border-radius: 2px;
-        }
-
-        .nav-links a:hover {
-            color: #fff;
-            text-shadow: 0 0 8px rgba(37, 99, 235, 0.8);
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .menu-toggle {
-            display: none;
-            background: none;
-            border: none;
-            color: #fff;
-            font-size: 1.6rem;
-            cursor: pointer;
-        }
-
-        /* --- Layout Container --- */
-        .container {
-            width: 90%;
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 120px 0 60px 0;
-        }
-
-        /* --- 2. Hero Section --- */
-        .hero-section {
-            text-align: center;
-            padding: 60px 20px;
-            margin-bottom: 60px;
-        }
-
-        .hero-title {
-            font-size: 3.4rem;
-            font-weight: 700;
-            line-height: 1.2;
-            margin-bottom: 20px;
-            background: linear-gradient(90deg, #ef4444 0%, #3b82f6 50%, #0249ac 75%, #a855f7 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: 1px;
-        }
-
-        .hero-subtitle {
-            font-size: 1.15rem;
-            font-weight: 400;
-            color: rgba(255, 255, 255, 0.8);
-            max-width: 600px;
-            margin: 0 auto 30px auto;
-        }
-
-        .cta-btn {
-            display: inline-block;
-            padding: 14px 36px;
-            border-radius: 30px;
-            background: linear-gradient(45deg, #dc2626, #2563eb);
-            color: #fff;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.05rem;
-            box-shadow: 0 0 20px rgba(220, 38, 38, 0.4), 0 0 10px rgba(37, 99, 235, 0.4);
-            transition: 0.3s;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            letter-spacing: 0.5px;
-        }
-
-        .cta-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 0 30px rgba(37, 99, 235, 0.7), 0 0 15px rgba(220, 38, 38, 0.6);
-        }
-
-        /* --- Section Titles --- */
-        .section-title {
-            text-align: center;
-            font-size: 2.2rem;
-            font-weight: 700;
-            margin-bottom: 40px;
-            position: relative;
-            letter-spacing: 1px;
-        }
-
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 60px;
-            height: 3px;
-            background: linear-gradient(90deg, #dc2626, #2563eb);
-            margin: 10px auto 0 auto;
-            border-radius: 2px;
-        }
-
-        /* --- 3. About Section (พร้อมระบบ Tabs) --- */
-        .about-tabs {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-        }
-
-        .tab-btn {
-            padding: 10px 24px;
-            border-radius: 20px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.3s;
-            letter-spacing: 0.5px;
-        }
-
-        .tab-btn:hover {
-            color: #fff;
-            border-color: rgba(239, 68, 68, 0.5);
-            background: rgba(239, 68, 68, 0.15);
-        }
-
-        .tab-btn.active {
-            color: #fff;
-            background: linear-gradient(45deg, #dc2626, #2563eb);
-            border-color: transparent;
-            box-shadow: 0 0 15px rgba(220, 38, 38, 0.4);
-        }
-
-        .about-content {
-            display: none;
-            animation: fadeIn 0.4s ease-in-out;
-        }
-
-        .about-content.active {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            align-items: center;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .about-text {
-            padding: 30px;
-        }
-
-        .about-img {
-            height: 300px;
-            border-radius: 20px;
-            background-size: cover;
-            background-position: center;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 0 20px rgba(37, 99, 235, 0.2);
-        }
-
-        /* --- 4. Highlights Section (แก้ไขการจัดวางตรงนี้) --- */
-        .highlights-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center; /* จัดให้การ์ดอยู่ตรงกลางเสมอ */
-            gap: 25px;
-            margin-bottom: 80px;
-        }
-
-        .highlight-card {
-            padding: 30px;
-            text-align: center;
-            width: calc(33.333% - 17px); /* บนคอมพิวเตอร์จะแบ่งแถวละ 3 การ์ด */
-            min-width: 280px; /* ขนาดขั้นต่ำการ์ด */
-            flex-grow: 0;
-        }
-
-        .highlight-icon {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-            display: inline-block;
-        }
-
-        /* --- 5. Connect With Us Section --- */
-        .connect-wrapper {
-            max-width: 650px;
-            margin: 0 auto;
-            padding: 40px 25px;
-            text-align: center;
-        }
-
-        .banner-img {
-            width: 100%;
-            height: 140px;
-            border-radius: 15px;
-            background: url('images/banner.png') center/cover;
-            margin-bottom: 20px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .links-container {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-top: 20px;
-            margin-bottom: 35px;
-        }
-
-        .link-button {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            padding: 14px 20px;
-            text-decoration: none;
-            color: #fff;
-            font-weight: 600;
-            font-size: 1.05rem;
-            border-radius: 12px;
-            background: rgba(255, 255, 255, 0.04);
-            transition: 0.3s;
-            overflow: hidden;
-            letter-spacing: 0.5px;
-        }
-
-        .link-button i {
-            position: absolute;
-            left: 20px;
-            font-size: 1.3rem;
-        }
-
-        .facebook-btn { border: 1px solid rgba(37, 99, 235, 0.5); } 
-        .instagram-btn { border: 1px solid rgba(245, 65, 197, 0.5); } 
-        .line-btn { border: 1px solid rgba(72, 236, 124, 0.5); }     
-        .email-btn { border: 1px solid rgba(168, 85, 247, 0.5); }
-        .tiktok-btn { border: 1px solid rgba(255, 0, 128, 0.5); }
-
-        .link-button:hover {
-            transform: translateY(-2px);
-            backdrop-filter: blur(8px);
-        }
-
-        .facebook-btn:hover { background: rgba(37, 99, 235, 0.25); box-shadow: 0 0 15px rgba(37, 99, 235, 0.5); }
-        .instagram-btn:hover { background: rgba(245, 65, 197, 0.25); box-shadow: 0 0 15px rgba(245, 65, 197, 0.5); }
-        .line-btn:hover { background: rgba(72, 236, 124, 0.25); box-shadow: 0 0 15px rgba(72, 236, 124, 0.5); }
-        .email-btn:hover { background: rgba(168, 85, 247, 0.25); box-shadow: 0 0 15px rgba(168, 85, 247, 0.5); }
-        .tiktok-btn:hover { background: rgba(255, 0, 128, 0.25); box-shadow: 0 0 15px rgba(255, 0, 128, 0.5); }
-
-        /* --- Google Form Wrapper Styles --- */
-        .form-section-title {
-            font-size: 1.35rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-            background: linear-gradient(90deg, #ef4444, #a855f7, #3b82f6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: 0.5px;
-        }
-
-        .iframe-container {
-            width: 100%;
-            border-radius: 16px;
-            overflow: hidden;
-            border: 1px solid rgba(37, 99, 235, 0.4);
-            box-shadow: 0 0 20px rgba(220, 38, 38, 0.25), inset 0 0 10px rgba(37, 99, 235, 0.2);
-            background: #ffffff;
-            margin-top: 15px;
-        }
-
-        .iframe-container iframe {
-            display: block;
-            width: 100%;
-            border: none;
-        }
-
-        /* --- Footer --- */
-        footer {
-            text-align: center;
-            padding: 20px;
-            color: rgba(255, 255, 255, 0.4);
-            font-size: 0.9rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        /* ========================================== */
-        /* --- Responsive Design สำหรับมือถือ (Mobile) --- */
-        /* ========================================== */
-        @media (max-width: 768px) {
-            html { scroll-padding-top: 80px; }
-            .hero-title { font-size: 2.3rem; }
-            .about-content.active { grid-template-columns: 1fr; }
-            .highlight-card { width: 100%; } /* มือถือให้เต็มความกว้าง */
-            
-            .navbar { 
-                padding: 12px 20px; 
-                flex-wrap: wrap;
-                border-radius: 25px;
-            }
-
-            .menu-toggle {
-                display: block;
-            }
-
-            .nav-links {
-                display: none;
-                width: 100%;
-                flex-direction: column;
-                gap: 12px;
-                padding-top: 15px;
-                margin-top: 10px;
-                border-top: 1px solid rgba(255, 255, 255, 0.1);
-                text-align: center;
-            }
-
-            .nav-links.active {
-                display: flex;
-            }
-
-            .nav-links a {
-                font-size: 1.05rem;
-                padding: 6px 0;
-            }
-
-            .link-button i {
-                left: 15px;
-                font-size: 1.2rem;
-            }
-
-            .connect-wrapper { padding: 30px 15px; }
-            .iframe-container iframe { height: 580px; }
-        }
-    </style>
 </head>
 <body>
+
+    <!-- Particle Background Container -->
+    <div id="tsparticles"></div>
 
     <!-- 1. Futuristic Navbar -->
     <nav class="navbar" id="navbar">
@@ -485,12 +45,12 @@
         <!-- 2. Hero Section -->
         <section id="home" class="hero-section">
             <h1 class="hero-title">ยินดีต้อนรับสู่ชมรม AIEEE</h1>
-            <p class="hero-subtitle">พื้นที่สำหรับการเรียนรู้ สร้างสรรค์ และปลดปล่อยศักยภาพของคนรุ่นใหม่ ร่วมสร้างอนาคตไปพร้อมกับเรา</p>
-            <a href="#form" class="cta-btn">เข้าร่วมชมรมกับเรา</a>
+            <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="200">พื้นที่สำหรับการเรียนรู้ สร้างสรรค์ และปลดปล่อยศักยภาพของคนรุ่นใหม่ ร่วมสร้างอนาคตไปพร้อมกับเรา</p>
+            <a href="#form" class="cta-btn" data-aos="zoom-in" data-aos-delay="400">เข้าร่วมชมรมกับเรา</a>
         </section>
 
-        <!-- 3. About Section (พร้อมระบบ 3 ปุ่มเลือกดูข้อมูล) -->
-        <section id="about" style="margin-bottom: 80px;">
+        <!-- 3. About Section -->
+        <section id="about" style="margin-bottom: 80px;" data-aos="fade-up">
             <h2 class="section-title">เกี่ยวกับชมรม</h2>
             
             <div class="about-tabs">
@@ -501,7 +61,7 @@
 
             <!-- แท็บที่ 1: About -->
             <div id="about-tab" class="about-content active">
-                <div class="glass-card about-text">
+                <div class="glass-card about-text" data-tilt data-tilt-max="5" data-tilt-glare data-tilt-max-glare="0.1">
                     <h3 style="margin-bottom: 15px; background: linear-gradient(90deg, #ef4444, #a855f7, #3b82f6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 1.4rem;">เราคือใคร?</h3>
                     <p style="color: rgba(255,255,255,0.85); font-size: 1.05rem;">เมื่อ AI (ปัญญาประดิษฐ์) เทคโนโลยีสุดล้ำ มารวมร่างกับ 
                         <br>IEEE (สถาบันวิศวกรไฟฟ้าและอิเล็กทรอนิกส์นานาชาติ) เครือข่ายเทคโนโลยีระดับโลก 
@@ -514,7 +74,7 @@
 
             <!-- แท็บที่ 2: SMC -->
             <div id="smc-tab" class="about-content">
-                <div class="glass-card about-text">
+                <div class="glass-card about-text" data-tilt data-tilt-max="5">
                     <h3 style="margin-bottom: 15px; background: linear-gradient(90deg, #ef4444, #a855f7, #3b82f6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 1.4rem;">IEEE SMC Society</h3>
                     <p style="color: rgba(255,255,255,0.85); font-size: 1.05rem;">
                         <strong>Systems, Man, and Cybernetics (SMC)</strong><br>
@@ -526,7 +86,7 @@
 
             <!-- แท็บที่ 3: SSCS -->
             <div id="sscs-tab" class="about-content">
-                <div class="glass-card about-text">
+                <div class="glass-card about-text" data-tilt data-tilt-max="5">
                     <h3 style="margin-bottom: 15px; background: linear-gradient(90deg, #ef4444, #a855f7, #3b82f6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 1.4rem;">IEEE SSCS Society</h3>
                     <p style="color: rgba(255,255,255,0.85); font-size: 1.05rem;">
                         <strong>Solid-State Circuits Society (SSCS)</strong><br>
@@ -538,36 +98,36 @@
 
         </section>
 
-        <!-- 4. Highlights Section (การ์ด 2 ใบด้านล่างอยู่ตรงกลาง) -->
+        <!-- 4. Highlights Section -->
         <section id="highlights">
-            <h2 class="section-title">สิ่งที่คุณจะได้รับ</h2>
+            <h2 class="section-title" data-aos="fade-up">สิ่งที่คุณจะได้รับ</h2>
             <div class="highlights-grid">
                 
-                <div class="glass-card highlight-card">
+                <div class="glass-card highlight-card" data-aos="fade-up" data-aos-delay="100" data-tilt data-tilt-max="8">
                     <div class="highlight-icon">💻</div>
                     <h3 style="margin-bottom: 8px; background: linear-gradient(90deg, #ef4444, #a855f7, #3b82f6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 1.3rem;">ได้ทำเวิร์กช็อป</h3>
                     <p style="font-size: 0.95rem; color: rgba(255,255,255,0.8);">ฟังบรรยายและพูดคุยกับผู้เชี่ยวชาญและทดลองทำจริง</p>
                 </div>
 
-                <div class="glass-card highlight-card">
+                <div class="glass-card highlight-card" data-aos="fade-up" data-aos-delay="200" data-tilt data-tilt-max="8">
                     <div class="highlight-icon">🏆</div>
                     <h3 style="margin-bottom: 8px; background: linear-gradient(90deg, #ef4444, #a855f7, #3b82f6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 1.3rem;">เข้าร่วมแข่งขัน</h3>
                     <p style="font-size: 0.95rem; color: rgba(255,255,255,0.8);">ระดับประเทศ</p>
                 </div>
 
-                <div class="glass-card highlight-card">
+                <div class="glass-card highlight-card" data-aos="fade-up" data-aos-delay="300" data-tilt data-tilt-max="8">
                     <div class="highlight-icon">🚀</div>
                     <h3 style="margin-bottom: 8px; background: linear-gradient(90deg, #ef4444, #a855f7, #3b82f6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 1.3rem;">ลงมือทำโปรเจกต์</h3>
                     <p style="font-size: 0.95rem; color: rgba(255,255,255,0.8);">AI และ IoT จริง</p>
                 </div>
 
-                <div class="glass-card highlight-card">
+                <div class="glass-card highlight-card" data-aos="fade-up" data-aos-delay="100" data-tilt data-tilt-max="8">
                     <div class="highlight-icon">📜</div>
                     <h3 style="margin-bottom: 8px; background: linear-gradient(90deg, #ef4444, #a855f7, #3b82f6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 1.3rem;">ได้เกียรติบัตร</h3>
                     <p style="font-size: 0.95rem; color: rgba(255,255,255,0.8);">เมื่อเข้าร่วมกิจกรรมของชมรม</p>
                 </div>
 
-                <div class="glass-card highlight-card">
+                <div class="glass-card highlight-card" data-aos="fade-up" data-aos-delay="200" data-tilt data-tilt-max="8">
                     <div class="highlight-icon">👥</div>
                     <h3 style="margin-bottom: 8px; background: linear-gradient(90deg, #ef4444, #a855f7, #3b82f6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 1.3rem;">ได้พบเพื่อนสายเทค</h3>
                     <p style="font-size: 0.95rem; color: rgba(255,255,255,0.8);">และการทำงานเป็นทีม</p>
@@ -577,14 +137,13 @@
         </section>
 
         <!-- 5. Connect With Us Section -->
-        <section id="connect">
+        <section id="connect" data-aos="fade-up">
             <h2 class="section-title">ช่องทางการติดต่อ</h2>
-            <div class="glass-card connect-wrapper">
+            <div class="glass-card connect-wrapper" data-tilt data-tilt-max="3">
                 <div class="banner-img"></div>
                 <h3 style="margin-bottom: 5px; font-size: 1.4rem;">Connect with Us</h3>
                 <p style="font-size: 0.9rem; color: rgba(255,255,255,0.65);">ติดตามข่าวสารและสอบถามข้อมูลเพิ่มเติมได้ผ่านช่องทางนี้</p>
                 
-                <!-- Social Links -->
                 <div class="links-container">
                     <a href="mailto:aieee.studentbranch.rmutt@gmail.com" class="link-button email-btn">
                         <i class="fa-solid fa-envelope"></i>
@@ -613,7 +172,7 @@
         <br><br>
 
         <!-- 6. Google Form Section -->
-        <section id="form">
+        <section id="form" data-aos="fade-up">
             <h2 class="section-title">แบบฟอร์มลงทะเบียนเข้าชมรม</h2>
             <div class="glass-card connect-wrapper">
                 <h3 class="form-section-title">กรุณากรอกข้อมูลด้านล่าง</h3>
@@ -637,19 +196,38 @@
         <p>© 2026 AIEEE. All rights reserved.</p>
     </footer>
 
-    <!-- JavaScript สำหรับสลับแท็บ และระบบ Navbar -->
+    <!-- Libraries & Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.12.0/tsparticles.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
+
     <script>
+        AOS.init({ duration: 800, once: true, offset: 100 });
+
+        tsParticles.load("tsparticles", {
+            background: { opacity: 0 },
+            fpsLimit: 60,
+            particles: {
+                color: { value: ["#ef4444", "#3b82f6", "#a855f7"] },
+                links: { color: "#3b82f6", distance: 140, enable: true, opacity: 0.25, width: 1 },
+                move: { enable: true, speed: 1.2, direction: "none", outModes: { default: "bounce" } },
+                number: { density: { enable: true, area: 800 }, value: 45 },
+                opacity: { value: 0.4 },
+                shape: { type: "circle" },
+                size: { value: { min: 1, max: 3 } }
+            },
+            detectRetina: true
+        });
+
         function openTab(evt, tabName) {
             const tabContents = document.getElementsByClassName("about-content");
             for (let i = 0; i < tabContents.length; i++) {
                 tabContents[i].classList.remove("active");
             }
-
             const tabBtns = document.getElementsByClassName("tab-btn");
             for (let i = 0; i < tabBtns.length; i++) {
                 tabBtns[i].classList.remove("active");
             }
-
             document.getElementById(tabName).classList.add("active");
             evt.currentTarget.classList.add("active");
         }
@@ -658,20 +236,15 @@
         const menuToggle = document.getElementById('menuToggle');
         const navLinks = document.getElementById('navLinks');
 
-        menuToggle.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
+        menuToggle.addEventListener('click', () => { navLinks.classList.toggle('active'); });
 
         document.querySelectorAll('.nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
-            });
+            link.addEventListener('click', () => { navLinks.classList.remove('active'); });
         });
 
         let lastScrollTop = 0;
         window.addEventListener('scroll', () => {
             let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            
             if (scrollTop > 80) {
                 if (scrollTop > lastScrollTop) {
                     navbar.classList.add('nav-hidden');
