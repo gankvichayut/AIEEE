@@ -427,6 +427,81 @@ body {
     letter-spacing: 0.5px;
 }
 
+/* --- Warning Notice Style --- */
+.registration-notice {
+    background: rgba(234, 179, 8, 0.1);
+    border: 1px solid rgba(234, 179, 8, 0.4);
+    border-radius: 12px;
+    padding: 12px 18px;
+    margin: 15px 0 20px 0;
+    color: #fef08a;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-align: left;
+    box-shadow: 0 0 15px rgba(234, 179, 8, 0.15);
+}
+
+.registration-notice i {
+    font-size: 1.2rem;
+    color: #eab308;
+    flex-shrink: 0;
+}
+
+.registration-notice strong {
+    color: #fff;
+    text-decoration: underline;
+}
+
+/* --- Form Switcher & Display Styles --- */
+.form-switcher {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 20px 0 25px 0;
+    flex-wrap: wrap;
+}
+
+.form-toggle-btn {
+    padding: 12px 24px;
+    border-radius: 25px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.form-toggle-btn:hover {
+    color: #fff;
+    border-color: rgba(239, 68, 68, 0.6);
+    background: rgba(239, 68, 68, 0.15);
+    box-shadow: 0 0 12px rgba(239, 68, 68, 0.3);
+}
+
+.form-toggle-btn.active {
+    color: #fff;
+    background: linear-gradient(45deg, #dc2626, #2563eb);
+    border-color: transparent;
+    box-shadow: 0 0 20px rgba(37, 99, 235, 0.5);
+}
+
+.form-display-content {
+    display: none;
+}
+
+.form-display-content.active {
+    display: block;
+    animation: fadeIn 0.4s ease-in-out;
+}
+
 .iframe-container {
     width: 100%;
     border-radius: 16px;
@@ -443,6 +518,20 @@ body {
     border: none;
 }
 
+.external-link-btn {
+    display: inline-block;
+    margin-top: 14px;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.external-link-btn:hover {
+    color: #ef4444;
+    text-decoration: underline;
+}
+
 /* --- Footer --- */
 footer {
     text-align: center;
@@ -452,7 +541,9 @@ footer {
     border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-/* Responsive Design */
+/* ========================================== */
+/* --- Responsive Design สำหรับมือถือ (Mobile) --- */
+/* ========================================== */
 @media (max-width: 768px) {
     html { scroll-padding-top: 80px; }
     .hero-title { font-size: 2.1rem; white-space: normal; border-right: none; animation: none; }
@@ -492,6 +583,11 @@ footer {
     .link-button i {
         left: 15px;
         font-size: 1.2rem;
+    }
+
+    .registration-notice {
+        font-size: 0.88rem;
+        padding: 10px 14px;
     }
 
     .connect-wrapper { padding: 30px 15px; }
