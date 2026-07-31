@@ -16,7 +16,7 @@
     <!-- AOS CSS -->
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 
-    <!-- แท็กเชื่อมโยงไปยังไฟล์ style.css ที่แยกออกมา -->
+    <!-- แท็กเชื่อมโยงไปยังไฟล์ style.css -->
     <link rel="stylesheet" href="style.css">
 
     <!-- แท็กสำหรับใส่ Favicon -->
@@ -45,7 +45,7 @@
         <!-- 2. Hero Section -->
         <section id="home" class="hero-section">
             <h1 class="hero-title">ยินดีต้อนรับสู่ชมรม AIEEE</h1>
-            <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="200">พื้นที่สำหรับการเรียนรู้ สร้างสรรค์ และปลดปล่อยศักยภาพของคนรุ่นใหม่ ร่วมสร้างอนาคตไปพร้อมกับเรา</p>
+            <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="200">พื้นที่สำหรับการเรียนรู้ สร้างสรรค์ และปลดปล่อยศักยภาพของคุณ</p>
             <a href="#form" class="cta-btn" data-aos="zoom-in" data-aos-delay="400">เข้าร่วมชมรมกับเรา</a>
         </section>
 
@@ -161,7 +161,7 @@
                         <i class="fa-brands fa-facebook"></i>
                         <span>Facebook Page</span>
                     </a>
-                    <a href="https://tiktok.com/@aieee.studentbranch.rmutt" target="_blank" class="link-button tiktok-btn">
+                    <a href="https://www.tiktok.com/@aieeermutt" target="_blank" class="link-button tiktok-btn">
                         <i class="fa-brands fa-tiktok"></i>
                         <span>TikTok</span>
                     </a>
@@ -171,21 +171,59 @@
 
         <br><br>
 
-        <!-- 6. Google Form Section -->
+        <!-- 6. Google Form / RMUTT Activity Section (พร้อมกล่องแจ้งเตือน + ปุ่มสลับ) -->
         <section id="form" data-aos="fade-up">
             <h2 class="section-title">แบบฟอร์มลงทะเบียนเข้าชมรม</h2>
             <div class="glass-card connect-wrapper">
-                <h3 class="form-section-title">กรุณากรอกข้อมูลด้านล่าง</h3>
-                <div class="iframe-container">
-                    <iframe 
-                        src="https://docs.google.com/forms/d/e/1FAIpQLSd2D2sT78sgaShRGE01wO5pfdCjmoKUk_L0DsnOO8d0AQr0mQ/viewform?embedded=true" 
-                        height="530" 
-                        frameborder="0" 
-                        marginheight="0" 
-                        marginwidth="0">
-                        กำลังโหลด…
-                    </iframe>
+                <h3 class="form-section-title">เลือกช่องทางการลงทะเบียน</h3>
+                
+                <!-- กล่องข้อความแจ้งเตือนสำคัญ -->
+                <div class="registration-notice">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <span><strong>ข้อควรระวัง:</strong> นักศึกษาจำเป็นต้องลงทะเบียน<strong>ทั้งสองช่องทาง</strong> (Google Form และ ระบบกิจกรรม RMUTT) เพื่อให้ข้อมูลในระบบมหาวิทยาลัยและชมรมตรงกันครับ</span>
                 </div>
+
+                <!-- ปุ่มสลับช่องทางลงทะเบียน -->
+                <div class="form-switcher">
+                    <button type="button" class="form-toggle-btn active" onclick="switchForm('google-form', this)">
+                        <i class="fa-solid fa-file-lines"></i> 1. Google Form
+                    </button>
+                    <button type="button" class="form-toggle-btn" onclick="switchForm('rmutt-activity', this)">
+                        <i class="fa-solid fa-graduation-cap"></i> 2. ระบบกิจกรรม RMUTT
+                    </button>
+                </div>
+
+                <!-- ช่องทางที่ 1: Google Form -->
+                <div id="google-form" class="form-display-content active">
+                    <div class="iframe-container">
+                        <iframe 
+                            src="https://docs.google.com/forms/d/e/1FAIpQLSd2D2sT78sgaShRGE01wO5pfdCjmoKUk_L0DsnOO8d0AQr0mQ/viewform?embedded=true" 
+                            height="530" 
+                            frameborder="0" 
+                            marginheight="0" 
+                            marginwidth="0">
+                            กำลังโหลด…
+                        </iframe>
+                    </div>
+                </div>
+
+                <!-- ช่องทางที่ 2: RMUTT Activity System -->
+                <div id="rmutt-activity" class="form-display-content">
+                    <div class="iframe-container">
+                        <iframe 
+                            src="https://activity.rmutt.ac.th/join-club.php?key=6a28f4bd489b540a68009a53" 
+                            height="530" 
+                            frameborder="0" 
+                            marginheight="0" 
+                            marginwidth="0">
+                            กำลังโหลด…
+                        </iframe>
+                    </div>
+                    <a href="https://activity.rmutt.ac.th/join-club.php?key=6a28f4bd489b540a68009a53" target="_blank" class="external-link-btn">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i> หากหน้าเว็บไม่แสดงผล คลิกที่นี่เพื่อเปิดระบบกิจกรรม RMUTT ในหน้าต่างใหม่
+                    </a>
+                </div>
+
             </div>
         </section>
 
@@ -202,8 +240,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
 
     <script>
+        // เริ่มต้นใช้งาน AOS
         AOS.init({ duration: 800, once: true, offset: 100 });
 
+        // ตั้งค่า Particles พื้นหลัง
         tsParticles.load("tsparticles", {
             background: { opacity: 0 },
             fpsLimit: 60,
@@ -219,6 +259,7 @@
             detectRetina: true
         });
 
+        // ฟังก์ชันสลับแท็บ About / SMC / SSCS
         function openTab(evt, tabName) {
             const tabContents = document.getElementsByClassName("about-content");
             for (let i = 0; i < tabContents.length; i++) {
@@ -232,6 +273,26 @@
             evt.currentTarget.classList.add("active");
         }
 
+        // ฟังก์ชันสลับฟอร์มลงทะเบียน (Google Form / RMUTT Activity)
+        function switchForm(formId, btnElement) {
+            const forms = document.querySelectorAll(".form-display-content");
+            forms.forEach(form => {
+                form.classList.remove("active");
+            });
+
+            const buttons = document.querySelectorAll(".form-toggle-btn");
+            buttons.forEach(btn => {
+                btn.classList.remove("active");
+            });
+
+            const selectedForm = document.getElementById(formId);
+            if (selectedForm) {
+                selectedForm.classList.add("active");
+            }
+            btnElement.classList.add("active");
+        }
+
+        // ฟังก์ชันระบบ Navbar และ Mobile Menu
         const navbar = document.getElementById('navbar');
         const menuToggle = document.getElementById('menuToggle');
         const navLinks = document.getElementById('navLinks');
